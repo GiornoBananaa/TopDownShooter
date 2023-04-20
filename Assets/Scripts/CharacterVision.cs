@@ -2,91 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyVision : MonoBehaviour
+public class CharacterVision : MonoBehaviour
 {
     [SerializeField] private float _angle;
     [SerializeField] private float _radius;
     [SerializeField] private float _meshResolution;
-    [SerializeField] private float _rateOfFire;
     [SerializeField] private MeshFilter viewMeshFilter;
-    [SerializeField] private LayerMask _targetMask;
     [SerializeField] private LayerMask _obstructionMask;
-    [SerializeField] private GameObject _bullet;
-    [SerializeField] private Transform _gun;
+    [SerializeField] private LayerMask _enemyMask;
 
-    private GameObject _player;
-    private bool _canSeePlayer;
-    private float _shootTime;
     private Mesh _viewMesh;
 
     private void Start()
     {
-        _canSeePlayer = false;
-        _shootTime = 0;
-
         _viewMesh = new Mesh();
         _viewMesh.name = "View Mesh";
         viewMeshFilter.mesh = _viewMesh;
     }
+
     private void LateUpdate()
     {
         DrawFieldOfViewMesh();
-    }
-    void Update()
-    {
-        FieldOfViewCheck();
-
-        if (_canSeePlayer)
-        {
-            ShootTarget();
-        }
-        _shootTime += Time.deltaTime;
-    }
-
-    private void ShootTarget()
-    {
-        Vector2 direction = ((Vector2)_player.transform.position - (Vector2)transform.position).normalized;
-
-        transform.up = direction;
-
-        if (_shootTime > _rateOfFire)
-        {
-            GameObject bullet = Instantiate(_bullet, _gun.position + _gun.up * 0.3f, _gun.rotation);
-            bullet.GetComponent<BulletScript>().TargetLayer = _targetMask;
-            bullet.transform.parent = null;
-            _shootTime = 0;
-        }
-    }
-
-    private void FieldOfViewCheck()
-    {
-        Collider2D rangeChecks = Physics2D.OverlapCircle(transform.position, _radius, _targetMask);
-
-        if (rangeChecks != null)
-        {
-            Transform target = rangeChecks.transform;
-            _player = target.gameObject;
-            Vector2 directionToTarget = (target.position - transform.position).normalized;
-
-            if (Vector2.Angle(transform.up, directionToTarget) < _angle / 2)
-            {
-                float distanceToTarget = Vector2.Distance(transform.position, target.position);
-
-                if (!Physics2D.Raycast(transform.position, directionToTarget, distanceToTarget, _obstructionMask))
-                {
-                    Debug.Log("3");
-                    _canSeePlayer = true;
-                }
-                else
-                {
-                    _canSeePlayer = false;
-                }
-            }
-            else
-                _canSeePlayer = false;
-        }
-        else if (_canSeePlayer)
-            _canSeePlayer = false;
     }
 
     private void OnDrawGizmos()
@@ -95,22 +31,12 @@ public class EnemyVision : MonoBehaviour
         Gizmos.color = Color.blue;
         Gizmos.DrawLine(transform.position, transform.position + DirectionFromAngle(transform.eulerAngles.z, _angle / 2) * _radius);
         Gizmos.DrawLine(transform.position, transform.position + DirectionFromAngle(transform.eulerAngles.z, -_angle / 2) * _radius);
-        if (_canSeePlayer)
-        {
-            Gizmos.color = Color.green;
-            Gizmos.DrawLine(transform.position, _player.transform.position);
-        }
     }
 
     private Vector3 DirectionFromAngle(float eulerY, float angleInDegrees)
     {
         angleInDegrees += eulerY;
         return new Vector3(-Mathf.Sin(angleInDegrees * Mathf.Deg2Rad), Mathf.Cos(angleInDegrees * Mathf.Deg2Rad), 0);
-    }
-
-    public bool CanSeePlayer()
-    {
-        return _canSeePlayer;
     }
 
     private void DrawFieldOfViewMesh()
@@ -147,6 +73,35 @@ public class EnemyVision : MonoBehaviour
         _viewMesh.triangles = triangles;
         _viewMesh.RecalculateNormals();
     }
+    /*
+    private void FieldOfViewCheck()
+    {
+        Collider2D rangeChecks = Physics2D.OverlapCircle(transform.position, _radius, _enemyMask);
+
+        if (rangeChecks != null)
+        {
+            Transform target = rangeChecks.transform;
+
+            Vector2 directionToTarget = (target.position - transform.position).normalized;
+
+            if (Vector2.Angle(transform.up, directionToTarget) < _angle / 2)
+            {
+                float distanceToTarget = Vector2.Distance(transform.position, target.position);
+
+                if (!Physics2D.Raycast(transform.position, directionToTarget, distanceToTarget, _obstructionMask))
+                {
+                    Debug.Log("3");
+                    target.GetComponent<EnemyVision>().enabled = true;
+                }
+                else
+                {
+                    target.GetComponent<EnemyVision>().enabled = false;
+                }
+            }
+            else
+                target.GetComponent<EnemyVision>().enabled = false;
+        }
+    }*/
 
     ViewCastInfo ViewCast(float globalAngle)
     {
