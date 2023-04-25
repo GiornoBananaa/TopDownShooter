@@ -24,15 +24,14 @@ public class BulletScript : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log((int)_obstacleLayer);
         if ((TargetLayer & (1 << collision.gameObject.layer)) != 0)
         {
-            Destroy(collision.gameObject);
+            //Destroy(collision.gameObject);
             if (collision.gameObject.GetComponent<CharacterMovement>())
             {
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
             }
-            Destroy(gameObject);
+            else Destroy(gameObject);
         }
         else if ((_obstacleLayer & (1 << collision.gameObject.layer)) != 0)
         {

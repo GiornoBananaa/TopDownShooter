@@ -7,12 +7,14 @@ public class CharacterMovement : MonoBehaviour
     [SerializeField] private float _speed = 1;
 
     private Rigidbody2D _rigidbody;
+    private Animator _animator;
 
 
     private void Start()
     {
         Physics2D.gravity = Vector2.zero;
         _rigidbody = GetComponent<Rigidbody2D>();
+        _animator = GetComponent<Animator>();
     }
 
     private void Update()
@@ -33,9 +35,14 @@ public class CharacterMovement : MonoBehaviour
 
         if (Input.GetKey(KeyCode.LeftShift))
         {
-            _y *= 2;
-            _x *= 2;
+            _y *= 1.5f;
+            _x *= 1.5f;
         }
+
+        if (_y != 0 || _x != 0)
+            _animator.SetBool("Run", true);
+        else
+            _animator.SetBool("Run", false);
 
         _rigidbody.velocity = new Vector2(_x, _y);
     }

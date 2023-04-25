@@ -9,6 +9,7 @@ public class EnemyVision : MonoBehaviour
     [SerializeField] private float _meshResolution;
     [SerializeField] private float _rateOfFire;
     [SerializeField] private MeshFilter viewMeshFilter;
+    [SerializeField] private Texture _fiewTexture;
     [SerializeField] private LayerMask _targetMask;
     [SerializeField] private LayerMask _obstructionMask;
     [SerializeField] private GameObject _bullet;
@@ -26,7 +27,9 @@ public class EnemyVision : MonoBehaviour
 
         _viewMesh = new Mesh();
         _viewMesh.name = "View Mesh";
+        //_viewMesh.SetColors(new Color[] { new Color(1, 1, 1, 0.2f) });
         viewMeshFilter.mesh = _viewMesh;
+        viewMeshFilter.gameObject.GetComponent<MeshRenderer>().material.SetTexture("_MainTex", _fiewTexture);
     }
     private void LateUpdate()
     {
@@ -74,7 +77,6 @@ public class EnemyVision : MonoBehaviour
 
                 if (!Physics2D.Raycast(transform.position, directionToTarget, distanceToTarget, _obstructionMask))
                 {
-                    Debug.Log("3");
                     _canSeePlayer = true;
                 }
                 else

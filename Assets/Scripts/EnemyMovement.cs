@@ -22,7 +22,7 @@ public class EnemyMovement : MonoBehaviour
         _vision = GetComponent<EnemyVision>();
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         if (!_vision.CanSeePlayer())
         {
