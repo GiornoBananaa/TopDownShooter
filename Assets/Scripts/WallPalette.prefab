@@ -42,6 +42,29 @@ Tilemap:
   m_GameObject: {fileID: 1356263247234977337}
   m_Enabled: 1
   m_Tiles:
+<<<<<<< HEAD
+=======
+  - first: {x: -7, y: 1, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 18
+      m_TileSpriteIndex: 17
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_TileObjectToInstantiateIndex: 65535
+      dummyAlignment: 0
+      m_AllTileFlags: 1073741825
+  - first: {x: -7, y: 2, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 17
+      m_TileSpriteIndex: 16
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_TileObjectToInstantiateIndex: 65535
+      dummyAlignment: 0
+      m_AllTileFlags: 1073741825
+>>>>>>> parent of 3f40cbd (Revert "Added black and grass tiles")
   - first: {x: -7, y: 3, z: 0}
     second:
       serializedVersion: 2
@@ -248,6 +271,13 @@ Tilemap:
     m_Data: {fileID: 11400000, guid: a84aa2b760f83db45a539a547e8e1dbe, type: 2}
   - m_RefCount: 1
     m_Data: {fileID: 11400000, guid: a11b5826bcee2104a8502e5ffe62dc3a, type: 2}
+<<<<<<< HEAD
+=======
+  - m_RefCount: 1
+    m_Data: {fileID: 11400000, guid: 4d920b6c2666c7e42a72fa4209ae1d10, type: 2}
+  - m_RefCount: 1
+    m_Data: {fileID: 11400000, guid: d885901425fa05348b3924262a882d6d, type: 2}
+>>>>>>> parent of 3f40cbd (Revert "Added black and grass tiles")
   m_TileSpriteArray:
   - m_RefCount: 1
     m_Data: {fileID: -1426650337, guid: a172cff1034184245b790a1c69d7b40a, type: 3}
@@ -281,8 +311,17 @@ Tilemap:
     m_Data: {fileID: 410061945, guid: a172cff1034184245b790a1c69d7b40a, type: 3}
   - m_RefCount: 1
     m_Data: {fileID: 21300000, guid: a4ee9b09f196e5d40bde57989864f4eb, type: 3}
+<<<<<<< HEAD
   m_TileMatrixArray:
   - m_RefCount: 17
+=======
+  - m_RefCount: 1
+    m_Data: {fileID: 21300000, guid: 49d15c7c7a44b1c4c9507e5610f2afcd, type: 3}
+  - m_RefCount: 1
+    m_Data: {fileID: 21300000, guid: 92883dbe405ce234982d20a9bfec791a, type: 3}
+  m_TileMatrixArray:
+  - m_RefCount: 19
+>>>>>>> parent of 3f40cbd (Revert "Added black and grass tiles")
     m_Data:
       e00: 1
       e01: 0
@@ -301,7 +340,11 @@ Tilemap:
       e32: 0
       e33: 1
   m_TileColorArray:
+<<<<<<< HEAD
   - m_RefCount: 17
+=======
+  - m_RefCount: 19
+>>>>>>> parent of 3f40cbd (Revert "Added black and grass tiles")
     m_Data: {r: 1, g: 1, b: 1, a: 1}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
@@ -421,7 +464,11 @@ Grid:
   m_CellGap: {x: 0, y: 0, z: 0}
   m_CellLayout: 0
   m_CellSwizzle: 0
+<<<<<<< HEAD
 --- !u!114 &8912877784358358355
+=======
+--- !u!114 &7171388041881908642
+>>>>>>> parent of 3f40cbd (Revert "Added black and grass tiles")
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

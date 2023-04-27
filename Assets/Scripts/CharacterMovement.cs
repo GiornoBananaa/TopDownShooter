@@ -39,6 +39,15 @@ public class CharacterMovement : MonoBehaviour
             _x *= 1.5f;
         }
 
+<<<<<<< HEAD
+=======
+        if (_y != 0 && _x != 0)
+        {
+            _y /= 1.5f;
+            _x /= 1.5f;
+        }
+
+>>>>>>> parent of 3f40cbd (Revert "Added black and grass tiles")
         if (_y != 0 || _x != 0)
             _animator.SetBool("Run", true);
         else

@@ -64,7 +64,11 @@ MonoBehaviour:
     overrideMaterial: {fileID: 0}
     overrideMaterialPassIndex: 0
     overrideDepthState: 0
+<<<<<<< HEAD
     depthCompareFunction: 5
+=======
+    depthCompareFunction: 0
+>>>>>>> parent of 3f40cbd (Revert "Added black and grass tiles")
     enableWrite: 0
     stencilSettings:
       overrideStencilState: 1
@@ -160,7 +164,11 @@ MonoBehaviour:
     m_Bits: 951
   m_DefaultStencilState:
     overrideStencilState: 0
+<<<<<<< HEAD
     stencilReference: 0
+=======
+    stencilReference: 6
+>>>>>>> parent of 3f40cbd (Revert "Added black and grass tiles")
     stencilCompareFunction: 8
     passOperation: 0
     failOperation: 0
