@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 979763882167020941}
   - component: {fileID: 979763882167020942}
-  m_Layer: 11
+  m_Layer: 6
   m_Name: gun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -98,7 +98,7 @@ GameObject:
   - component: {fileID: 979763882612442189}
   - component: {fileID: 3903801184597432989}
   - component: {fileID: 8822147748378735253}
-  m_Layer: 11
+  m_Layer: 6
   m_Name: Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -162,7 +162,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -1
+  m_SortingOrder: 1
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
   m_Color: {r: 0.7924528, g: 0.58686364, b: 0.58686364, a: 1}
   m_FlipX: 0
@@ -223,11 +223,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1da5afc531d04c24a8739e6132bd9e04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _angle: 75
-  _radius: 10
-  _meshResolution: 1
+  _angle: 90
+  _radius: 20
+  _meshResolution: 2
   _rateOfFire: 0.08
   viewMeshFilter: {fileID: 979763882936197474}
+  _fiewTexture: {fileID: 2800000, guid: 1cae18d02ec514944bfdddf9aeb6d113, type: 3}
   _targetMask:
     serializedVersion: 2
     m_Bits: 256
@@ -265,7 +266,7 @@ GameObject:
   - component: {fileID: 979763882936197472}
   - component: {fileID: 979763882936197474}
   - component: {fileID: 979763882936197473}
-  m_Layer: 11
+  m_Layer: 6
   m_Name: ViewVisaulisation
   m_TagString: Untagged
   m_Icon: {fileID: 0}

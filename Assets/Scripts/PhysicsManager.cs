@@ -10,6 +10,7 @@ public class PhysicsManager : MonoBehaviour
 
     void Start()
     {
+        Physics2D.gravity = Vector2.zero;
         Physics2D.IgnoreLayerCollision(_bulletLayer, _bulletLayer);
         Physics2D.IgnoreLayerCollision(_enemyLayer, _enemyLayer);
         Physics2D.IgnoreLayerCollision(_wallLayer, _wallLayer);
