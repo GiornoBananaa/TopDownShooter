@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: e1d096b4733be6f40a85de3a28b49434
+guid: fb6fef53b9aab1d4a957058ee66a94ab
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -43,7 +43,7 @@ TextureImporter:
   lightmap: 0
   compressionQuality: 50
   spriteMode: 2
-  spriteExtrude: 6
+  spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
@@ -117,7 +117,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Character-Sheet_0
+      name: CharacterIdle-Sheet_0
       rect:
         serializedVersion: 2
         x: 0
@@ -127,26 +127,18 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: 0, y: -17}
-        - {x: 17, y: 0}
-        - {x: 0, y: 17}
-        - {x: -17, y: 0}
-      physicsShape:
-      - - {x: 0, y: -17}
-        - {x: 17, y: 0}
-        - {x: 0, y: 17}
-        - {x: -17, y: 0}
+      outline: []
+      physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: eed194134e21b1a428814f293edcddd3
-      internalID: -1799639861
+      spriteID: 3a4e9f319fdd7c546b8a1f9900795da1
+      internalID: -1427055792
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Character-Sheet_1
+      name: CharacterIdle-Sheet_1
       rect:
         serializedVersion: 2
         x: 34
@@ -160,14 +152,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d1238daff44df4e4893d9a89d2ea5d16
-      internalID: 1172976195
+      spriteID: 146d260fab70b314cb9e31fc3fb5a96e
+      internalID: -822264136
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Character-Sheet_2
+      name: CharacterIdle-Sheet_2
       rect:
         serializedVersion: 2
         x: 68
@@ -181,71 +173,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4904551018b93d24a98a4aec7133f856
-      internalID: 842497288
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Character-Sheet_3
-      rect:
-        serializedVersion: 2
-        x: 102
-        y: 0
-        width: 34
-        height: 34
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c886228205bcbc94da57856beb87a02b
-      internalID: 1453396355
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Character-Sheet_4
-      rect:
-        serializedVersion: 2
-        x: 136
-        y: 0
-        width: 34
-        height: 34
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 690812134780809429bc6b6b49d6b28e
-      internalID: -207104220
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Character-Sheet_5
-      rect:
-        serializedVersion: 2
-        x: 170
-        y: 0
-        width: 34
-        height: 34
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 29e43421b813b094993a9aa08bb75a4a
-      internalID: 887744092
+      spriteID: 8b863f9951c05344ca86a6ffab7b0d04
+      internalID: -887442885
       vertices: []
       indices: 
       edges: []
@@ -261,12 +190,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Character-Sheet_0: -1799639861
-      Character-Sheet_3: 1453396355
-      Character-Sheet_1: 1172976195
-      Character-Sheet_2: 842497288
-      Character-Sheet_5: 887744092
-      Character-Sheet_4: -207104220
+      CharacterIdle-Sheet_1: -822264136
+      CharacterIdle-Sheet_2: -887442885
+      CharacterIdle-Sheet_0: -1427055792
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

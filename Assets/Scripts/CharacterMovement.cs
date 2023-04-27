@@ -4,23 +4,39 @@ using UnityEngine;
 
 public class CharacterMovement : MonoBehaviour
 {
+    [SerializeField] private Animator _legsAnimator;
+    [SerializeField] private Sprite _knifeIdle;
+    [SerializeField] private Sprite _gunIdle;
     [SerializeField] private float _speed = 1;
 
     private Rigidbody2D _rigidbody;
-    private Animator _animator;
+    private bool _gunEquiped;
 
 
     private void Start()
     {
+        _gunEquiped = true;
         Physics2D.gravity = Vector2.zero;
         _rigidbody = GetComponent<Rigidbody2D>();
-        _animator = GetComponent<Animator>();
     }
 
     private void Update()
     {
+        Inventory();
         Move();
         LookAtCursor();
+    }
+
+    void Inventory()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            _gunEquiped = true;
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            _gunEquiped = true;
+        }
     }
 
     void Move()
@@ -40,9 +56,9 @@ public class CharacterMovement : MonoBehaviour
         }
 
         if (_y != 0 || _x != 0)
-            _animator.SetBool("Run", true);
+            _legsAnimator.SetBool("Run", true);
         else
-            _animator.SetBool("Run", false);
+            _legsAnimator.SetBool("Run", false);
 
         _rigidbody.velocity = new Vector2(_x, _y);
     }
