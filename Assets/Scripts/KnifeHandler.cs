@@ -10,24 +10,23 @@ public class KnifeHandler : MonoBehaviour
 
     private void Start()
     {
-        _animator = GetComponent<Animator>();
+        
     }
 
-    private void Update()
+    public void Stab()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            _animator.SetTrigger("Knife");
+        if(_animator is null) _animator = GetComponent<Animator>();
 
-            Collider2D[] colliders = Physics2D.OverlapCapsuleAll(
-                transform.position + (transform.up * 0.8f), new Vector2(0.9f,1.1f),
-                CapsuleDirection2D.Vertical, 0, _enemyLayerMask);
-            
-            foreach (Collider2D collider in colliders)
-            {
-                Debug.Log(collider.name);
-                Destroy(collider.gameObject);
-            }
+        _animator.SetTrigger("Knife");
+
+        Collider2D[] colliders = Physics2D.OverlapCapsuleAll(
+            transform.position + (transform.up * 0.8f), new Vector2(0.9f, 1.1f),
+            CapsuleDirection2D.Vertical, 0, _enemyLayerMask);
+
+        foreach (Collider2D collider in colliders)
+        {
+            Debug.Log(collider.name);
+            Destroy(collider.gameObject);
         }
     }
 }

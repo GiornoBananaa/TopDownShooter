@@ -14,25 +14,32 @@ public class Inventory : MonoBehaviour
 
     private void Start()
     {
-        _gunEquiped = false;
+        _gunEquiped = true;
         _spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1) && _gunEquiped)
+        if (Input.GetMouseButtonDown(1) && _gunEquiped)
         {
-            _gunEquiped = false;
-            _spriteRenderer.sprite = _gunIdle;
-            _knifeHandler.enabled = false;
-            _gun.SetActive(true);
+            Stab();
         }
-        if (Input.GetKeyDown(KeyCode.Alpha2) && !_gunEquiped)
-        {
-            _gunEquiped = true;
-            _spriteRenderer.sprite = _knifeIdle;
-            _knifeHandler.enabled = true;
-            _gun.SetActive(false);
-        }
+    }
+
+    public void EquipGun()
+    {
+        _gunEquiped = true;
+        _spriteRenderer.sprite = _gunIdle;
+        _knifeHandler.enabled = false;
+        _gun.SetActive(true);
+    }
+
+    public void Stab()
+    {
+        _gunEquiped = false;
+        _spriteRenderer.sprite = _knifeIdle;
+        _knifeHandler.enabled = true;
+        _gun.SetActive(false);
+        _knifeHandler.Stab();
     }
 }
