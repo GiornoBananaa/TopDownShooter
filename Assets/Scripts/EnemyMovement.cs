@@ -9,6 +9,7 @@ public class EnemyMovement : MonoBehaviour
 
     private Rigidbody2D _rigidbody;
     private EnemyVision _vision;
+    private Animator _animator;
     private int _target;
     private bool _goBack;
 
@@ -20,6 +21,7 @@ public class EnemyMovement : MonoBehaviour
         Physics2D.gravity = Vector2.zero;
         _rigidbody = GetComponent<Rigidbody2D>();
         _vision = GetComponent<EnemyVision>();
+        _animator = GetComponent<Animator>();
     }
 
     private void FixedUpdate()
@@ -29,6 +31,11 @@ public class EnemyMovement : MonoBehaviour
             Move();
         }
         else _rigidbody.velocity = Vector2.zero;
+
+        if (_rigidbody.velocity.sqrMagnitude == 0) 
+            _animator.SetBool("Walk", false);
+        else
+            _animator.SetBool("Walk", true);
     }
 
     void Move()

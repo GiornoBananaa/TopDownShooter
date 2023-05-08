@@ -20,6 +20,11 @@ public class EnemyVision : MonoBehaviour
     private float _shootTime;
     private Mesh _viewMesh;
 
+    public bool CanSeePlayer()
+    {
+        return _canSeePlayer;
+    }
+
     private void Start()
     {
         _canSeePlayer = false;
@@ -27,14 +32,15 @@ public class EnemyVision : MonoBehaviour
 
         _viewMesh = new Mesh();
         _viewMesh.name = "View Mesh";
-        //_viewMesh.SetColors(new Color[] { new Color(1, 1, 1, 0.2f) });
         viewMeshFilter.mesh = _viewMesh;
         viewMeshFilter.gameObject.GetComponent<MeshRenderer>().material.SetTexture("_MainTex", _fiewTexture);
     }
+
     private void LateUpdate()
     {
         DrawFieldOfViewMesh();
     }
+
     void Update()
     {
         FieldOfViewCheck();
@@ -108,11 +114,6 @@ public class EnemyVision : MonoBehaviour
     {
         angleInDegrees += eulerY;
         return new Vector3(-Mathf.Sin(angleInDegrees * Mathf.Deg2Rad), Mathf.Cos(angleInDegrees * Mathf.Deg2Rad), 0);
-    }
-
-    public bool CanSeePlayer()
-    {
-        return _canSeePlayer;
     }
 
     private void DrawFieldOfViewMesh()
