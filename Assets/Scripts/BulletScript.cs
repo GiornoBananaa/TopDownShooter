@@ -26,7 +26,6 @@ public class BulletScript : MonoBehaviour
     {
         if ((TargetLayer & (1 << collision.gameObject.layer)) != 0)
         {
-            //Destroy(collision.gameObject);
             if (collision.gameObject.GetComponent<CharacterMovement>())
             {
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);

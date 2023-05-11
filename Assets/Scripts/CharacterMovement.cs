@@ -36,6 +36,11 @@ public class CharacterMovement : MonoBehaviour
             _y *= 1.5f;
             _x *= 1.5f;
         }
+        if (_y != 0 && _x != 0)
+        {
+            _y /= 2f;
+            _x /= 2f;
+        }
 
         if (_y != 0 || _x != 0)
             _legsAnimator.SetBool("Run", true);
