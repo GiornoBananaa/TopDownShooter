@@ -6618,6 +6618,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1708458069}
+  - component: {fileID: 1708458070}
   m_Layer: 0
   m_Name: EnemyManager
   m_TagString: Untagged
@@ -6642,6 +6643,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1708458070
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1708458068}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2a05fd2a17dbfd4399c7d4a5ef2f7a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1723343477 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 843520494149096859, guid: 4a243e1036ddf314485b045ef8d3fd47, type: 3}

@@ -90,12 +90,18 @@ public class EnemyMovement : MonoBehaviour
         }
     }
 
-    public void GetNewPatrolPath()
+    private void GetNewPatrolPath()
     {
         _patrolPath = _pathManager.GetPatrolPaths(CurrentRoom);
     }
 
-    public void GetPlayerPosition()
+    public void RiseAlarm()
+    {
+        GetPlayerPosition();
+        _knowAboutPlayer = true;
+    }
+
+    private void GetPlayerPosition()
     {
         Transform[] path = _pathManager.FindPath(CurrentRoom, _pathManager.FindPlayer());
         if (_knowAboutPlayer)

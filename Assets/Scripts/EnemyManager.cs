@@ -8,15 +8,7 @@ public class EnemyManager : MonoBehaviour
     {
         foreach(EnemyMovement enemy in GetComponentsInChildren<EnemyMovement>())
         {
-            enemy.GetPlayerPosition();
-        }
-    }
-
-    public void StartPatrol()
-    {
-        foreach (EnemyMovement enemy in GetComponentsInChildren<EnemyMovement>())
-        {
-            enemy.GetNewPatrolPath();
+            enemy.RiseAlarm();
         }
     }
 }
