@@ -25,8 +25,7 @@ public class KnifeHandler : MonoBehaviour
 
         foreach (Collider2D collider in colliders)
         {
-            //GameManager.KillEnemy(collider.gameObject);
-            Destroy(collider.gameObject);
+            collider.GetComponent<EnemyMovement>().HP -= 101;
         }
     }
 }

@@ -17,6 +17,7 @@ public class EnemyVision : MonoBehaviour
 
     private GameObject _player;
     private bool _canSeePlayer;
+    private bool _showFieldOfView;
     private float _shootTime;
     private Mesh _viewMesh;
 
@@ -27,6 +28,7 @@ public class EnemyVision : MonoBehaviour
 
     private void Start()
     {
+        _showFieldOfView = true;
         _canSeePlayer = false;
         _shootTime = 0;
 
@@ -38,10 +40,10 @@ public class EnemyVision : MonoBehaviour
 
     private void LateUpdate()
     {
-        DrawFieldOfViewMesh();
+        if(_showFieldOfView) DrawFieldOfViewMesh();
     }
 
-    void Update()
+    private void Update()
     {
         FieldOfViewCheck();
 
@@ -50,6 +52,13 @@ public class EnemyVision : MonoBehaviour
             ShootTarget();
         }
         _shootTime += Time.deltaTime;
+    }
+
+    public void SeekForPlayer()
+    {
+        _angle = 360;
+        _showFieldOfView = false;
+        _viewMesh.Clear();
     }
 
     private void ShootTarget()

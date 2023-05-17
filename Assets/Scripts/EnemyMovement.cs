@@ -11,18 +11,35 @@ public class EnemyMovement : MonoBehaviour
     private Transform[] _playerFollowPath;
     private Rigidbody2D _rigidbody;
     private EnemyVision _vision;
+    private SpriteRenderer _sprite;
     private Animator _animator;
     private int _target;
-    private bool _goBack;
-    private bool _stayOnPosition;
+    private int _hp;
     private static bool _knowAboutPlayer;
 
     public RoomManager CurrentRoom;
 
+    public int HP 
+    { 
+        get => _hp; 
+        set
+        {
+            if (_hp > value) 
+            {
+                StartCoroutine(HitVisualization()); 
+            }
+            _hp = value;
+            if (_hp <= 0)
+            {
+                transform.parent.GetComponent<EnemyManager>().KillEnemy(gameObject);
+            }
+        } 
+    } 
+
 
     private void Start()
     {
-        _goBack = false;
+        HP = 50; 
         _target = 0;
         _knowAboutPlayer = false;
         Physics2D.gravity = Vector2.zero;
@@ -30,6 +47,7 @@ public class EnemyMovement : MonoBehaviour
         _rigidbody = GetComponent<Rigidbody2D>();
         _vision = GetComponent<EnemyVision>();
         _animator = GetComponent<Animator>();
+        _sprite = GetComponent<SpriteRenderer>();
 
         InvokeRepeating("GetNewPatrolPath", 0.1f, 6);
         InvokeRepeating("GetPlayerPosition", 0.1f, 3);
@@ -41,7 +59,7 @@ public class EnemyMovement : MonoBehaviour
         {
             if (_knowAboutPlayer)
             {
-                FollowPaths(_playerFollowPath, _speed * 1.5f, false);
+                FollowPaths(_playerFollowPath, _speed * 2f, false);
             }
             else
             {
@@ -67,11 +85,9 @@ public class EnemyMovement : MonoBehaviour
     {
         if (Vector2.Distance(transform.position, path[_target].position) < 0.2f)
         {
-            if (_target == path.Length - 1) _goBack = true;
-            else if (_target == 0) _goBack = false;
+            if (_target == path.Length - 1 && isLooped) _target = 0;
 
-            if (_goBack && isLooped) _target--;
-            else if(!_goBack) _target++;
+            if (_target != path.Length - 1) _target++;
         }
         if (!(!isLooped && Vector2.Distance(transform.position, path[path.Length - 1].position) < 0.2f))
         {
@@ -87,6 +103,7 @@ public class EnemyMovement : MonoBehaviour
         else
         {
             _rigidbody.velocity = Vector2.zero;
+            _rigidbody.angularVelocity = 0;
         }
     }
 
@@ -97,6 +114,7 @@ public class EnemyMovement : MonoBehaviour
 
     public void RiseAlarm()
     {
+        _target = 0;
         GetPlayerPosition();
         _knowAboutPlayer = true;
     }
@@ -117,5 +135,22 @@ public class EnemyMovement : MonoBehaviour
             }
         }
         _playerFollowPath = path;
+    }
+
+    private IEnumerator HitVisualization()
+    {
+        float gb = _sprite.color.g;
+        while (gb > 0.4f)
+        {
+            gb = Mathf.Lerp(gb,0,0.5f);
+            _sprite.color = new Color(1,gb,gb);
+            yield return new WaitForFixedUpdate();
+        }
+        while (gb < 0.95f)
+        {
+            gb = Mathf.Lerp(gb, 1, 0.5f);
+            _sprite.color = new Color(1, gb, gb);
+            yield return new WaitForFixedUpdate();
+        }
     }
 }

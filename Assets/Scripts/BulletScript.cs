@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class BulletScript : MonoBehaviour
 {
     [SerializeField] private float _speed;
+    [SerializeField] private int _damage;
     [SerializeField] private LayerMask _obstacleLayer;
 
     public LayerMask TargetLayer;
@@ -26,11 +27,17 @@ public class BulletScript : MonoBehaviour
     {
         if ((TargetLayer & (1 << collision.gameObject.layer)) != 0)
         {
-            if (collision.gameObject.GetComponent<CharacterMovement>())
+            EnemyMovement _enemyMovemrnt;
+            CharacterMovement _characterMovemrnt;
+            if (_characterMovemrnt = collision.gameObject.GetComponent<CharacterMovement>())
             {
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+                _characterMovemrnt.HP -= _damage;
             }
-            else Destroy(gameObject);
+            else if (_enemyMovemrnt = collision.gameObject.GetComponent<EnemyMovement>())
+            {
+                _enemyMovemrnt.HP -= _damage;
+            }
+            Destroy(gameObject);
         }
         else if ((_obstacleLayer & (1 << collision.gameObject.layer)) != 0)
         {

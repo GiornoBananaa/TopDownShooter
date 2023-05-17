@@ -73,36 +73,6 @@ public class CharacterVision : MonoBehaviour
         _viewMesh.triangles = triangles;
         _viewMesh.RecalculateNormals();
     }
-    /*
-    private void FieldOfViewCheck()
-    {
-        Collider2D rangeChecks = Physics2D.OverlapCircle(transform.position, _radius, _enemyMask);
-
-        if (rangeChecks != null)
-        {
-            Transform target = rangeChecks.transform;
-
-            Vector2 directionToTarget = (target.position - transform.position).normalized;
-
-            if (Vector2.Angle(transform.up, directionToTarget) < _angle / 2)
-            {
-                float distanceToTarget = Vector2.Distance(transform.position, target.position);
-
-                if (!Physics2D.Raycast(transform.position, directionToTarget, distanceToTarget, _obstructionMask))
-                {
-                    Debug.Log("3");
-                    target.GetComponent<EnemyVision>().enabled = true;
-                }
-                else
-                {
-                    target.GetComponent<EnemyVision>().enabled = false;
-                }
-            }
-            else
-                target.GetComponent<EnemyVision>().enabled = false;
-        }
-    }*/
-
     ViewCastInfo ViewCast(float globalAngle)
     {
         Vector3 dir = DirectionFromAngle(transform.eulerAngles.z, globalAngle);

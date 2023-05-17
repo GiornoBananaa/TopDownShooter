@@ -27,7 +27,6 @@ public class GunShooting : MonoBehaviour
             if (!_alarmIsRised)
             {
                 _enemyManager.RaiseTheAlarm();
-                Debug.Log(_enemyManager.gameObject.name);
                 _alarmIsRised = true;
             }
             GameObject bullet = Instantiate(_bullet, transform.position + transform.up * 0.3f, transform.rotation);
