@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class RoomManager : MonoBehaviour
 {
+    [SerializeField]private EnemyManager _enemyManager;
+
     public bool PlayerIsInside { get; private set; }
     public List<GameObject> Enemies { get; private set; }
     public RoomManager[] AccessibleRooms;
@@ -15,26 +17,30 @@ public class RoomManager : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        EnemyMovement enemyMovement;
         if (collision.gameObject.GetComponent<CharacterMovement>())
         {
             PlayerIsInside = true;
         }
-        else if (collision.gameObject.GetComponent<EnemyMovement>())
+        else if (enemyMovement = collision.gameObject.GetComponent<EnemyMovement>())
         {
-            collision.gameObject.GetComponent<EnemyMovement>().CurrentRoom = this;
+            enemyMovement.CurrentRoom = this;
+            enemyMovement.GetNewPatrolPath();
             Enemies.Add(collision.gameObject);
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
+        EnemyMovement enemyMovement;
         if (collision.gameObject.GetComponent<CharacterMovement>())
         {
             PlayerIsInside = false;
         }
-        else if (collision.gameObject.GetComponent<EnemyMovement>())
+        else if (enemyMovement = collision.gameObject.GetComponent<EnemyMovement>())
         {
             Enemies.Remove(collision.gameObject);
+            if (enemyMovement.CurrentRoom is null && enemyMovement.CurrentRoom == this) _enemyManager.FindEnemyRoom(enemyMovement.gameObject);
         }
     }
 }

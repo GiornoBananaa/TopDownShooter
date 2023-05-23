@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnemyMovement : MonoBehaviour
 {
     [SerializeField] private float _speed = 1;
+    [SerializeField] private AudioSource _walkAudioSource;
 
     private PathManager _pathManager;
     private Transform[] _patrolPath;
@@ -49,7 +50,6 @@ public class EnemyMovement : MonoBehaviour
         _animator = GetComponent<Animator>();
         _sprite = GetComponent<SpriteRenderer>();
 
-        InvokeRepeating("GetNewPatrolPath", 0.1f, 6);
         InvokeRepeating("GetPlayerPosition", 0.1f, 3);
     }
 
@@ -57,17 +57,20 @@ public class EnemyMovement : MonoBehaviour
     {
         if (!_vision.CanSeePlayer())
         {
-            if (_knowAboutPlayer)
+            if (!_walkAudioSource.isPlaying) _walkAudioSource.Play();
+            if (_knowAboutPlayer && _playerFollowPath is not null)
             {
                 FollowPaths(_playerFollowPath, _speed * 2f, false);
             }
             else
             {
-                if (_patrolPath is not null) FollowPaths(_patrolPath, _speed, true);
+                if (_patrolPath is not null) 
+                    FollowPaths(_patrolPath, _speed, true);
             }
         }
         else
         {
+            if (_walkAudioSource.isPlaying) _walkAudioSource.Stop();
             if (!_knowAboutPlayer)
             {
                 _knowAboutPlayer = true;
@@ -83,13 +86,14 @@ public class EnemyMovement : MonoBehaviour
 
     private void FollowPaths(Transform[] path, float speed, bool isLooped)
     {
+        if(_target >= path.Length) _target = 0;
         if (Vector2.Distance(transform.position, path[_target].position) < 0.2f)
         {
             if (_target == path.Length - 1 && isLooped) _target = 0;
 
             if (_target != path.Length - 1) _target++;
         }
-        if (!(!isLooped && Vector2.Distance(transform.position, path[path.Length - 1].position) < 0.2f))
+        if (Vector2.Distance(transform.position, path[path.Length - 1].position) >= 0.2f || isLooped && path.Length - 1 != _target)
         {
             Vector3 norTar = (path[_target].position - transform.position).normalized;
             float angle = Mathf.Atan2(norTar.y, norTar.x) * Mathf.Rad2Deg;
@@ -104,12 +108,14 @@ public class EnemyMovement : MonoBehaviour
         {
             _rigidbody.velocity = Vector2.zero;
             _rigidbody.angularVelocity = 0;
+            transform.rotation = path[path.Length - 1].rotation;
         }
     }
 
-    private void GetNewPatrolPath()
+    public void GetNewPatrolPath()
     {
         _patrolPath = _pathManager.GetPatrolPaths(CurrentRoom);
+        _target = 0;
     }
 
     public void RiseAlarm()
@@ -122,9 +128,10 @@ public class EnemyMovement : MonoBehaviour
     private void GetPlayerPosition()
     {
         Transform[] path = _pathManager.FindPath(CurrentRoom, _pathManager.FindPlayer());
+        if (path is null) return;
         if (_knowAboutPlayer)
         {
-            if (_target >= _playerFollowPath.Length || path.Length == 1)
+            if (_playerFollowPath is null || _target >= _playerFollowPath.Length || path.Length == 1)
             {
                 _target = 0;
             }

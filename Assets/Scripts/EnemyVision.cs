@@ -8,6 +8,7 @@ public class EnemyVision : MonoBehaviour
     [SerializeField] private float _radius;
     [SerializeField] private float _meshResolution;
     [SerializeField] private float _rateOfFire;
+    [SerializeField] private AudioSource _shootAudioSource;
     [SerializeField] private MeshFilter viewMeshFilter;
     [SerializeField] private Texture _fiewTexture;
     [SerializeField] private LayerMask _targetMask;
@@ -63,12 +64,14 @@ public class EnemyVision : MonoBehaviour
 
     private void ShootTarget()
     {
+        if(_showFieldOfView) transform.parent.GetComponent<EnemyManager>().RaiseTheAlarm();
         Vector2 direction = ((Vector2)_player.transform.position - (Vector2)transform.position).normalized;
 
         transform.up = direction;
 
         if (_shootTime > _rateOfFire)
         {
+            _shootAudioSource.Play();
             GameObject bullet = Instantiate(_bullet, _gun.position + _gun.up * 0.3f, _gun.rotation);
             bullet.GetComponent<BulletScript>().TargetLayer = _targetMask;
             bullet.transform.parent = null;
@@ -92,7 +95,7 @@ public class EnemyVision : MonoBehaviour
 
                 if (!Physics2D.Raycast(transform.position, directionToTarget, distanceToTarget, _obstructionMask))
                 {
-                    _canSeePlayer = true;
+                    StartCoroutine(StartShooting());
                 }
                 else
                 {
@@ -104,6 +107,12 @@ public class EnemyVision : MonoBehaviour
         }
         else if (_canSeePlayer)
             _canSeePlayer = false;
+    }
+
+    private IEnumerator StartShooting()
+    {
+        yield return new WaitForSeconds(0.2f);
+        _canSeePlayer = true;
     }
 
     private void OnDrawGizmos()

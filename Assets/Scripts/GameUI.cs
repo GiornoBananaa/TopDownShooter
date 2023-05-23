@@ -11,6 +11,12 @@ public class GameUI : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
+    public void Pause(GameObject panel)
+    {
+        Time.timeScale = 0;
+        panel.SetActive(true);
+    }
+
     public void Continue(GameObject panel)
     {
         panel.SetActive(false);

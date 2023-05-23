@@ -11,7 +11,6 @@ public class MainMenuButtons : MonoBehaviour
     [SerializeField] private Button ContinueButton;
     [SerializeField] private Button[] LevelButtons;
 
-
     private void Start()
     {
         StartButton.onClick.AddListener(StartNewGame);
@@ -29,7 +28,7 @@ public class MainMenuButtons : MonoBehaviour
             ContinueButton.gameObject.SetActive(true);
         }
 
-        for(int i = 0; i <= level; i++)
+        for(int i = 0; i < level && i < 2; i++)
         {
             LevelButtons[i].GetComponent<Image>().color = Color.green;
             LevelButtons[i].enabled = true;
@@ -44,8 +43,9 @@ public class MainMenuButtons : MonoBehaviour
 
     public void Continue()
     {
-        int Level = PlayerPrefs.GetInt("Level");
-        SceneManager.LoadScene(Level);
+        int level = PlayerPrefs.GetInt("Level");
+        if (level > 2) level = 2;
+        SceneManager.LoadScene(level);
     }
     public void LoadLevel(int level)
     {
@@ -55,6 +55,5 @@ public class MainMenuButtons : MonoBehaviour
     private void OnApplicationQuit()
     {
         PlayerPrefs.Save();
-        PlayerPrefs.DeleteAll();
     }
 }

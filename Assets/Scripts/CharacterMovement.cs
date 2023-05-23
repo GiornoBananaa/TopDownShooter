@@ -8,11 +8,14 @@ using TMPro;
 public class CharacterMovement : MonoBehaviour
 {
     [SerializeField] private Animator _legsAnimator;
+    [SerializeField] private AudioSource _walkingSoundSource;
     [SerializeField] private GameObject _deathPanel;
     [SerializeField] private TMP_Text _hpText;
     [SerializeField] private Image _hpImage;
     [SerializeField] private float _speed = 1;
-    [SerializeField] private int _maxhealth = 100;
+    [SerializeField] private int _maxhealth = 500;
+
+    public static Vector2 Position;
 
     private Rigidbody2D _rigidbody;
     private int _hp;
@@ -27,7 +30,7 @@ public class CharacterMovement : MonoBehaviour
             else newColor = new Color(1,0 ,0);
 
              _hp = value;
-            _hpText.text = value.ToString();
+            _hpText.text = ((float)value/500*100).ToString();
             _hpImage.color = newColor;
 
             if (_hp <= 0)
@@ -50,6 +53,7 @@ public class CharacterMovement : MonoBehaviour
     {
         Move();
         LookAtCursor();
+        Position = transform.position;
     }
 
     void Move()
@@ -74,10 +78,21 @@ public class CharacterMovement : MonoBehaviour
         }
 
         if (_y != 0 || _x != 0)
+        {
+            if (!_walkingSoundSource.isPlaying)
+            {
+                _walkingSoundSource.Play();
+            }
             _legsAnimator.SetBool("Run", true);
+        }
         else
+        {
+            if (_walkingSoundSource.isPlaying)
+            {
+                _walkingSoundSource.Stop();
+            }
             _legsAnimator.SetBool("Run", false);
-
+        }
         _rigidbody.velocity = new Vector2(_x, _y);
     }
 

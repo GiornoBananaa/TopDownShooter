@@ -21,7 +21,7 @@ public class PathManager : MonoBehaviour
         for (int i = 0; i < currentPosition.AccessibleRooms.Length; i++)
         {
             pathes[i] = FindPath(currentPosition, currentPosition.AccessibleRooms[i], destination, new List<RoomManager> { });
-            if (pathes[minLengthIndex] is not null && pathes[minLengthIndex].Count > pathes[i].Count) minLengthIndex = i;
+            if (pathes[i] is not null && pathes[minLengthIndex] is not null && pathes[minLengthIndex].Count > pathes[i].Count) minLengthIndex = i;
         }
 
         if (pathes[minLengthIndex] is null) return null;
@@ -34,7 +34,6 @@ public class PathManager : MonoBehaviour
         {
             path[i] = pathes[minLengthIndex][count - 1 - i].transform;
         }
-
         return path;
     }
 
@@ -72,7 +71,9 @@ public class PathManager : MonoBehaviour
     {
         foreach(RoomManager room in transform.GetComponentsInChildren<RoomManager>())
         {
-            if (room.PlayerIsInside) return room;
+            if (room.PlayerIsInside) {
+                return room;
+            }
         }
         return transform.GetChild(4).GetComponent<RoomManager>();
     }
