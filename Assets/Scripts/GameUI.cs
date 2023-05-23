@@ -5,22 +5,37 @@ using UnityEngine.SceneManagement;
 
 public class GameUI : MonoBehaviour
 {
+    [SerializeField] private GameObject _pausePanel;
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (_pausePanel.activeSelf) 
+                _pausePanel.SetActive(false);
+            else 
+                _pausePanel.SetActive(true);
+        }
+    }
+
     public void Retry()
     {
         Time.timeScale = 1;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
-    public void Pause(GameObject panel)
+    public void Pause()
     {
-        Time.timeScale = 0;
-        panel.SetActive(true);
-    }
-
-    public void Continue(GameObject panel)
-    {
-        panel.SetActive(false);
-        Time.timeScale = 1;
+        if (_pausePanel.activeSelf)
+        {
+            Time.timeScale = 1;
+            _pausePanel.SetActive(false);
+        }
+        else
+        {
+            Time.timeScale = 0;
+            _pausePanel.SetActive(true);
+        }
     }
 
     public void MainMenu()

@@ -657,11 +657,11 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 499977778}
         m_TargetAssemblyTypeName: GameUI, Assembly-CSharp
-        m_MethodName: Continue
-        m_Mode: 2
+        m_MethodName: Pause
+        m_Mode: 1
         m_Arguments:
-          m_ObjectArgument: {fileID: 287925369}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -1659,6 +1659,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 976a886ea3d64b84fa4eec9f30d33766, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _pausePanel: {fileID: 287925369}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -5180,10 +5181,10 @@ MonoBehaviour:
       - m_Target: {fileID: 499977778}
         m_TargetAssemblyTypeName: GameUI, Assembly-CSharp
         m_MethodName: Pause
-        m_Mode: 2
+        m_Mode: 1
         m_Arguments:
-          m_ObjectArgument: {fileID: 287925369}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -12182,7 +12183,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 0499d25b2eea79e44b53a02b3ff3163c, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.4
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0
