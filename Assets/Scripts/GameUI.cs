@@ -10,12 +10,7 @@ public class GameUI : MonoBehaviour
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            if (_pausePanel.activeSelf) 
-                _pausePanel.SetActive(false);
-            else 
-                _pausePanel.SetActive(true);
-        }
+            Pause();
     }
 
     public void Retry()

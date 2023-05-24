@@ -47,7 +47,7 @@ public class EnemyManager : MonoBehaviour
             RoomManager room = _pathManager.transform.GetChild(spawnIndex).GetComponent<RoomManager>();
             foreach(RoomManager r in room.AccessibleRooms)
             {
-                if (r == playerRoom) continue;
+                if (r.name == playerRoom.name) continue;
             }
             if(playerRoom != room)
             {
